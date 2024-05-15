@@ -19,8 +19,7 @@ class UserViews(viewsets.ViewSet):
         if request.method == 'POST':
             user = UserSerializer(data=request.data)
             if user.is_valid():
-                if User.objects.filter(phone=self.request.data['phone']).exists() or \
-                    User.objects.filter(password=self.request.data['password']).exists():
+                if User.objects.filter(phone=self.request.data['phone']).exists():
                     response = dict({
                         "Message": "User already exists"
                     })
@@ -75,26 +74,21 @@ class LogoutViews(viewsets.ViewSet):
 class HotelBooking(viewsets.ViewSet):
     def create(self, request):
         if request.method == 'POST':
-            hotel = Hotel.objects.get_or_create(hotel_name=Hotel.hotel_name,
-                                                location=Hotel.location,
-                                                address=Hotel.address,
-                                                standing=Hotel.standing,
-                                                rooms=Hotel.rooms)
-            if hotel:
-                hotel_book = HotelBookingSerializer(data=request.data)
-                if hotel_book.is_valid():
-                    try:
-                        hotel_book.save()
-                    except:
-                        pass
+            hotel_booking = HotelBookingSerializer(data=request.data)
+            if hotel_booking.is_valid():
+                if Hotel.objects.filter(hotel_name=self.request.data['hotel_name']).exists():
+                    hotel_booking.save()
                     response = dict({
-                        "Message": "Created"
+                        "Message": "Success"
                     })
                     return Response(response, status=status.HTTP_201_CREATED)
                 else:
                     response = dict({
-                        "Message": "Failed"
+                        "Message": "Hotel doesn't exists"
                     })
-                    return Response(response, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(response, status=status.HTTP_404_NOT_FOUND)
             else:
-                pass
+                response = dict({
+                    "Message": "Fail"
+                })
+                return Response(response, status=status.HTTP_400_BAD_REQUEST)

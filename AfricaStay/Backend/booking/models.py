@@ -23,6 +23,7 @@ class AirportCompany(models.Model):
 class RoomsAvailable(models.Model):
     rooms_type = models.CharField(max_length=50, default=None)
     number_of_guest = models.IntegerField(default=0)
+    room_image = models.ImageField(upload_to='room_images/', default=None, blank=False)
     price_per_night = models.DecimalField(default=0, null=False, max_digits=10, decimal_places=2)
     
     def __str__(self):

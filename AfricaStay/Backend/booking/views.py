@@ -13,6 +13,7 @@ from booking.serializers import RoomsSerializer, HotelSerializer
 
 class RoomsViews(viewsets.ViewSet):
     def create(self, request):
+        """ Add a new room """
         if request.method == 'POST':
             room = RoomsSerializer(data=request.data)
             if room.is_valid():
@@ -36,6 +37,7 @@ class RoomsViews(viewsets.ViewSet):
 
 class HotelViews(viewsets.ViewSet):
     def create(self, request):
+        """ Add a new hotel """
         if request.method == 'POST':
             hotel = HotelSerializer(data=request.data)
             if hotel.is_valid():
