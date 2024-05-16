@@ -18,9 +18,9 @@ class HotelBook(models.Model):
     phone = models.CharField(max_length=20, null=False, default=None)
     hotel_name = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     room = models.ForeignKey(RoomsAvailable, on_delete=models.CASCADE, default=None)
-    check_in = models.DateField(blank=True, null=False)
-    check_out = models.DateField(blank=True, null=False)
-    created_date = models.DateField(blank=True, null=False, default=None)
+    check_in = models.CharField(blank=False, null=False, max_length=50)
+    check_out = models.CharField(blank=False, null=False, max_length=50)
+    created_date = models.CharField(blank=False, max_length=50, default=None)
     
     def __str__(self):
         return f"{self.client_name}, {self.phone}"

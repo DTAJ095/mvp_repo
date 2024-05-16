@@ -9,7 +9,8 @@ from rest_framework import request
 from .serializers import UserSerializer, UserLoginSerializer, HotelBookingSerializer
 from africa_stay.settings import DATABASES
 from django.contrib.auth import login, authenticate
-from booking.models import Hotel
+from booking.models import Hotel, RoomsAvailable
+from datetime import datetime
 
 
 # user view
@@ -73,18 +74,28 @@ class LogoutViews(viewsets.ViewSet):
 
 class HotelBooking(viewsets.ViewSet):
     def create(self, request):
+        """ Booking a hotel """
+        check_in = datetime.strptime(self.request.data['check_in'], '%d-%m-%Y')
+        check_out = datetime.strptime(self.request.data['check_out'], '%d-%m-%Y')
+        created_date = datetime.now()
         if request.method == 'POST':
             hotel_booking = HotelBookingSerializer(data=request.data)
             if hotel_booking.is_valid():
                 if Hotel.objects.filter(hotel_name=self.request.data['hotel_name']).exists():
-                    hotel_booking.save()
-                    response = dict({
-                        "Message": "Success"
-                    })
-                    return Response(response, status=status.HTTP_201_CREATED)
+                    if RoomsAvailable.objects.filter(rooms_type=self.request.data['rooms_type']).exists():
+                        hotel_booking.save()
+                        response = dict({
+                            "Message": "Success"
+                        })
+                        return Response(response, status=status.HTTP_201_CREATED)
+                    else:
+                        response = dict({
+                            "Message": "Room not available"
+                        })
+                        return Response(response, status=status.HTTP_404_NOT_FOUND)
                 else:
                     response = dict({
-                        "Message": "Hotel doesn't exists"
+                        "Message": "Hotel not available"
                     })
                     return Response(response, status=status.HTTP_404_NOT_FOUND)
             else:
