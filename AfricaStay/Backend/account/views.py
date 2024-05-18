@@ -10,7 +10,7 @@ from .serializers import UserSerializer, UserLoginSerializer, HotelBookingSerial
 from africa_stay.settings import DATABASES
 from django.contrib.auth import login, authenticate
 from booking.models import Hotel, RoomsAvailable
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 # user view
@@ -72,17 +72,19 @@ class LogoutViews(viewsets.ViewSet):
         pass
 
 
-class HotelBooking(viewsets.ViewSet):
+class HotelBookingViews(viewsets.ViewSet):
     def create(self, request):
-        """ Booking a hotel """
+        """ Book a hotel """
         check_in = datetime.strptime(self.request.data['check_in'], '%d-%m-%Y')
         check_out = datetime.strptime(self.request.data['check_out'], '%d-%m-%Y')
-        created_date = datetime.now()
+        now = datetime.now() + timedelta(hours=1)
+        created_date = now.strftime('%d-%m-%Y, %h-%m-%s')
         if request.method == 'POST':
             hotel_booking = HotelBookingSerializer(data=request.data)
             if hotel_booking.is_valid():
                 if Hotel.objects.filter(hotel_name=self.request.data['hotel_name']).exists():
-                    if RoomsAvailable.objects.filter(rooms_type=self.request.data['rooms_type']).exists():
+                    hotel = hotel_booking.validated_data['hotel_name']
+                    if check_in > now and check_out > check_in:
                         hotel_booking.save()
                         response = dict({
                             "Message": "Success"
@@ -90,12 +92,12 @@ class HotelBooking(viewsets.ViewSet):
                         return Response(response, status=status.HTTP_201_CREATED)
                     else:
                         response = dict({
-                            "Message": "Room not available"
+                            "Message": "Check in or check out date is invalid"
                         })
-                        return Response(response, status=status.HTTP_404_NOT_FOUND)
+                        return Response(response, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     response = dict({
-                        "Message": "Hotel not available"
+                        "Message": "Hotel doesn't exists"
                     })
                     return Response(response, status=status.HTTP_404_NOT_FOUND)
             else:
@@ -103,3 +105,4 @@ class HotelBooking(viewsets.ViewSet):
                     "Message": "Fail"
                 })
                 return Response(response, status=status.HTTP_400_BAD_REQUEST)
+    
