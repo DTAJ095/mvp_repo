@@ -1,5 +1,5 @@
 from django.db import models
-from booking.models import Hotel
+
 # Create your models here.
 
 class User(models.Model):
@@ -13,10 +13,11 @@ class User(models.Model):
 
 
 class HotelBook(models.Model):
+    book_id = models.AutoField(primary_key=True, default=None, null=False)
     client_name = models.CharField(max_length=50, default=None, null=False)
     phone = models.CharField(max_length=20, null=False, default=None)
-    hotel_name = models.ForeignKey(Hotel, on_delete=models.CASCADE)
-    # room = models.ForeignKey(RoomsAvailable, on_delete=models.CASCADE, default=None)
+    hotel_name = models.CharField(max_length=100, null=False, default=None)
+    room = models.CharField(max_length=50, null=False, default=None)
     check_in = models.DateField(blank=False, null=False, max_length=50)
     check_out = models.DateField(blank=False, null=False, max_length=50)
     created_date = models.DateField(auto_now_add=True, blank=False, null=False, max_length=50)

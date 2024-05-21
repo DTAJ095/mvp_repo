@@ -6,7 +6,7 @@ from rest_framework import viewsets, status
 from rest_framework.response import Response
 from account.models import User, HotelBook
 from rest_framework import request
-from .serializers import UserSerializer, UserLoginSerializer, HotelBookingSerializer
+from .serializers import UserSerializer, UserLoginSerializer
 from africa_stay.settings import DATABASES
 from django.contrib.auth import login, authenticate
 from booking.models import Hotel, RoomsAvailable
@@ -80,29 +80,42 @@ class HotelBookingViews(viewsets.ViewSet):
         now = datetime.now() + timedelta(hours=1)
         created_date = now.strftime('%d-%m-%Y, %h-%m-%s')
         if request.method == 'POST':
-            # hotel_booking = HotelBookingSerializer(data=request.data)
-            # if hotel_booking.is_valid():
-            hotel_booking = HotelBook(
+            hotel_book = HotelBook(
                 client_name=self.request.data['client_name'],
                 phone=self.request.data['phone'],
                 hotel_name=self.request.data['hotel_name'],
+                room=self.request.data['room'],
                 check_in=check_in,
                 check_out=check_out,
                 created_date=created_date
             )
             if Hotel.objects.filter(hotel_name=self.request.data['hotel_name']).exists():
-                hotel = hotel_booking.validated_data['hotel_name']
-                if check_in > now and check_out > check_in:
-                    hotel_booking.save()
-                    response = dict({
-                        "Message": "Success"
-                    })
-                    return Response(response, status=status.HTTP_201_CREATED)
+                if RoomsAvailable.objects.filter(rooms_type=self.request.data['room']).exists():
+                    if check_in > now and check_out > check_in:
+                        if HotelBook.objects.filter(hotel_name=self.request.data['hotel_name'],
+                                                    room=self.request.data['room'],
+                                                    check_in=check_in,
+                                                    check_out=check_out).exists():
+                            response = dict({
+                                "Message": "Booking already exists"
+                            })
+                            return Response(response)
+                        else:
+                            hotel_book.save()
+                            response = dict({
+                                "Message": "Booking created"
+                            })
+                            return Response(response, status=status.HTTP_200_OK)
+                    else:
+                        response = dict({
+                            "Message": "Check in or check out date is invalid"
+                        })
+                        return Response(response, status=status.HTTP_400_BAD_REQUEST)
                 else:
                     response = dict({
-                        "Message": "Check in or check out date is invalid"
+                        "Message": "Room is not available"
                     })
-                    return Response(response, status=status.HTTP_400_BAD_REQUEST)
+                    return Response(response, status=status.HTTP_404_NOT_FOUND)
             else:
                 response = dict({
                     "Message": "Hotel doesn't exists"
