@@ -202,7 +202,7 @@ class LandingPage extends StatelessWidget {
                           SizedBox(height: 8.0),
                           ElevatedButton(
                             onPressed: () {
-                              // Implement action for button
+                              Navigator.pushNamed(context, '/detail');
                             },
                             child: Text('View Details'),
                           ),
@@ -255,7 +255,7 @@ class LandingPage extends StatelessWidget {
                           SizedBox(height: 8.0),
                           ElevatedButton(
                             onPressed: () {
-                              // Implement action for button
+                              Navigator.pushNamed(context, '/detail');
                             },
                             child: Text('View Details'),
                           ),
@@ -308,7 +308,7 @@ class LandingPage extends StatelessWidget {
                           SizedBox(height: 8.0),
                           ElevatedButton(
                             onPressed: () {
-                              // Implement action for button
+                              Navigator.pushNamed(context, '/detail');
                             },
                             child: Text('View Details'),
                           ),
@@ -361,7 +361,7 @@ class LandingPage extends StatelessWidget {
                           SizedBox(height: 8.0),
                           ElevatedButton(
                             onPressed: () {
-                              // Implement action for button
+                              Navigator.pushNamed(context, '/detail');
                             },
                             child: Text('View Details'),
                           ),
@@ -414,7 +414,7 @@ class LandingPage extends StatelessWidget {
                           SizedBox(height: 8.0),
                           ElevatedButton(
                             onPressed: () {
-                              // Implement action for button
+                              Navigator.pushNamed(context, '/detail');
                             },
                             child: Text('View Details'),
                           ),

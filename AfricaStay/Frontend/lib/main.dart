@@ -1,11 +1,9 @@
-// ignore_for_file: use_key_in_widget_constructors
-
 import 'package:flutter/material.dart';
 import 'package:login_background/Onboarding_Screen.dart';
 import 'package:login_background/landing_page.dart';
 import 'login.dart'; // Import the LoginPage
 import 'signup.dart'; // Import the SignupPage
-// Import the OnboardingScreen
+import 'detail_page.dart'; // Import the DetailPage
 
 void main() {
   runApp(MyApp());
@@ -24,6 +22,7 @@ class MyApp extends StatelessWidget {
         '/signup': (context) => SignupPage(), // Define route for SignupPage
         '/onboarding': (context) =>
             OnboardingScreen(), // Define route for OnboardingScreen
+        '/detail': (context) => DetailPage(), // Define route for DetailPage
       },
     );
   }

@@ -64,6 +64,9 @@ flutter:
     - assets/images/login_background.jpg
     - assets/images/room.jpg
     - assets/images/room2.jpg
+    - assets/images/hotel1.jpg
+    - assets/images/hotel_room1.jpg
+    - assets/images/detail_background.jpg
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
