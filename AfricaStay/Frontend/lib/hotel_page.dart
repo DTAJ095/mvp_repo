@@ -1,8 +1,33 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
 
-class HotelPage extends StatelessWidget {
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:login_background/hotel.dart';
+
+class HotelPage extends StatefulWidget {
   const HotelPage({super.key});
 
+  @override
+  State<HotelPage> createState() => _HotelPageState();
+}
+
+class _HotelPageState extends State<HotelPage> {
+  @override
+  void initState() {
+    super.initState();
+    getHotel();
+  }
+  void getHotel() async {
+    final dio = Dio();
+    try {
+      var response = await dio.get('http://172.20.10.3:8000/booking/list/hotels/');
+      print(response.toString());
+    }
+    catch(e) {
+      print(e);
+    };
+  }
   @override
   Widget build(BuildContext context) {
     final String username = 'Username'; // Replace with actual username
@@ -116,81 +141,12 @@ class HotelPage extends StatelessWidget {
                 ),
               ),
             ),
-            _buildHotelInfo(context, 'assets/images/hotel2.jpg', 'Hotel name',
-                'Location, Address, Standing'),
-            _buildHotelInfo(context, 'assets/images/hotel3.jpg', 'Hotel name',
-                'Location, Address, Standing'),
-            _buildHotelInfo(context, 'assets/images/hotel4.jpg', 'Hotel name',
-                'Location, Address, Standing'),
-            _buildHotelInfo(context, 'assets/images/hotel5.jpg', 'Hotel name',
-                'Location, Address, Standing'),
-            _buildHotelInfo(context, 'assets/images/hotel6.jpg', 'Hotel name',
-                'Location, Address, Standing'),
-            _buildHotelInfo(context, 'assets/images/hotel6.jpg', 'Hotel name',
-                'Location, Address, Standing'),
-            _buildHotelInfo(context, 'assets/images/hotel6.jpg', 'Hotel name',
-                'Location, Address, Standing'),
+            /*ListView.builder(
+
+            )*/
           ],
         ),
       ],
-    );
-  }
-  Widget _buildHotelInfo(BuildContext context, String imagePath,
-      String hotelName, String details) {
-    return SliverPadding(
-      padding: EdgeInsets.all(8.0),
-      sliver: SliverToBoxAdapter(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Expanded(
-                flex: 1,
-                child: Image.asset(
-                  imagePath,
-                  height: 120,
-                  width: 120,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              SizedBox(width: 8.0),
-              Expanded(
-                flex: 1,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      hotelName,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white, // Set text color to white
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    Text(
-                      details,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white, // Set text color to white
-                      ),
-                    ),
-                    SizedBox(height: 8.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/detail');
-                      },
-                      child: Text('View Details'),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

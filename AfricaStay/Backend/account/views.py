@@ -125,4 +125,11 @@ class HotelBookingViews(viewsets.ViewSet):
                 "Message": "Fail"
             })
             return Response(response, status=status.HTTP_400_BAD_REQUEST)
-    
+
+
+class GetUserViews(viewsets.ViewSet):
+    def list(self, request):
+        """ Get all users """
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)

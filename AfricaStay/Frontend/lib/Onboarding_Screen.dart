@@ -140,7 +140,7 @@ class OnboardingScreen extends StatelessWidget {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/landing_page');
+                    Navigator.pushNamed(context, '/login');
                   },
                   child: const Text('Log In',
                       style: TextStyle(

@@ -1,4 +1,3 @@
-import rest_framework
 import json
 from rest_framework.response import Response
 from rest_framework import request
@@ -57,7 +56,9 @@ class HotelViews(viewsets.ViewSet):
                     "Message": "Fail"
                 })
                 return Response(response)
-    
+
+
+class HotelList(viewsets.ViewSet):
     def list(self, request):
         """ List all hotels """
         hotels = Hotel.objects.all()
