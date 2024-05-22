@@ -51,7 +51,7 @@ class _LandingPageState extends State<LandingPage> {
           currentIndex: _currentIndex,
           onTap: (index) => setCurrentPage(index),
           selectedItemColor: Colors.blue,
-          selectedFontSize: 12,
+          selectedFontSize: 20,
           unselectedItemColor: Colors.grey,
           unselectedFontSize: 12,
           type: BottomNavigationBarType.fixed,
