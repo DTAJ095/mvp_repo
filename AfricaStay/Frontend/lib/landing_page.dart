@@ -172,7 +172,7 @@ class LandingPage extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Image.asset(
-                        'assets/images/room.jpg',
+                        'assets/images/hotel2.jpg',
                         height: 120,
                         width: 120,
                         fit: BoxFit.cover,
@@ -225,7 +225,7 @@ class LandingPage extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Image.asset(
-                        'assets/images/room.jpg',
+                        'assets/images/hotel3.jpg',
                         height: 120,
                         width: 120,
                         fit: BoxFit.cover,
@@ -278,7 +278,7 @@ class LandingPage extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Image.asset(
-                        'assets/images/room.jpg',
+                        'assets/images/hotel4.jpg',
                         height: 120,
                         width: 120,
                         fit: BoxFit.cover,
@@ -331,7 +331,7 @@ class LandingPage extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Image.asset(
-                        'assets/images/room2.jpg',
+                        'assets/images/hotel5.jpg',
                         height: 120,
                         width: 120,
                         fit: BoxFit.cover,
@@ -384,7 +384,7 @@ class LandingPage extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Image.asset(
-                        'assets/images/room.jpg',
+                        'assets/images/hotel6.jpg',
                         height: 120,
                         width: 120,
                         fit: BoxFit.cover,
