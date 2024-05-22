@@ -40,4 +40,4 @@ class Hotel(models.Model):
     description = models.TextField(default=None, blank=True)
     
     def __str__(self):
-        return f"{self.hotel_name}, {self.location}"
+        return f"{self.hotel_name} - {self.location}"

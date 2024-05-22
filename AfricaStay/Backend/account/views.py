@@ -92,12 +92,11 @@ class HotelBookingViews(viewsets.ViewSet):
             if Hotel.objects.filter(hotel_name=self.request.data['hotel_name']).exists():
                 if RoomsAvailable.objects.filter(rooms_type=self.request.data['room']).exists():
                     if check_in > now and check_out > check_in:
-                        if HotelBook.objects.filter(hotel_name=self.request.data['hotel_name'],
-                                                    room=self.request.data['room'],
+                        if HotelBook.objects.filter(room=request.data['room'],
                                                     check_in=check_in,
                                                     check_out=check_out).exists():
                             response = dict({
-                                "Message": "Booking already exists"
+                                "Message": "Booking already exists for this user"
                             })
                             return Response(response)
                         else:

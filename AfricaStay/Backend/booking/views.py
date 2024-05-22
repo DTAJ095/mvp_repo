@@ -5,7 +5,7 @@ from rest_framework import request
 from rest_framework import viewsets, status
 from booking.models import RoomsAvailable, Hotel, AirportCompany, FlightsAvailable
 from africa_stay.settings import DATABASES
-from booking.serializers import RoomsSerializer, HotelSerializer
+from booking.serializers import RoomsSerializer, HotelSerializer, GetHotelSerializer
 
 
 # Create your views here.
@@ -52,3 +52,14 @@ class HotelViews(viewsets.ViewSet):
                         "Message": "Hotel created"
                     })
                     return Response(response, status=status.HTTP_200_OK)
+            else:
+                response = dict({
+                    "Message": "Fail"
+                })
+                return Response(response)
+    
+    def list(self, request):
+        """ List all hotels """
+        hotels = Hotel.objects.all()
+        serializer = GetHotelSerializer(hotels, many=True)
+        return Response(serializer.data)
