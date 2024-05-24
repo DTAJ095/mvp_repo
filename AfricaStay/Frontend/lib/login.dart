@@ -120,7 +120,7 @@ class LoginPage extends StatelessWidget {
                                     formkey.currentState!.validate();
                                 if (isValidForm) {
                                   final response = await dio.post(
-                                      'http://172.20.10.3:8000/account/user/login/',
+                                      'http://192.168.1.118:8000/account/user/login/',
                                       data: {
                                         'phone': phone.text,
                                         'password': password.text

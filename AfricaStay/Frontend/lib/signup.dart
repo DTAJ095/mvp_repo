@@ -187,7 +187,7 @@ class _SignupPageState extends State<SignupPage> {
                                     formkey.currentState!.validate();
                                 if (isValidForm) {
                                   final response = await dio.post(
-                                      'http://192.168.122.1 :8000/account/user/create/',
+                                      'http://192.168.1.118:8000/account/user/create/',
                                       data: {
                                         'first_name': FirstName.text,
                                         'last_name': LastName.text,

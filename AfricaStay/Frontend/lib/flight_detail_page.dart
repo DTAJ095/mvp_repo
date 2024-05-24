@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 
-class DetailPage extends StatelessWidget {
+class FlightDetailPage extends StatelessWidget {
+  const FlightDetailPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,9 +33,9 @@ class DetailPage extends StatelessWidget {
                         color:
                             Colors.black.withOpacity(0.7), // Increased opacity
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
-                          'Availabilities',
+                          'Flights available',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -82,11 +84,11 @@ class DetailPage extends StatelessWidget {
                   ),
                 ),
                 // Spacer to add some space between the image and text
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 // Container for the text on the right
                 Expanded(
                   child: Container(
-                    child: Column(
+                    child: const Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -94,7 +96,7 @@ class DetailPage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                'Hotel Name:',
+                                'Company:',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -166,7 +168,7 @@ class DetailPage extends StatelessWidget {
                           children: [
                             Expanded(
                               child: Text(
-                                'Standing:',
+                                'Description:',
                                 style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
@@ -186,29 +188,6 @@ class DetailPage extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: 5),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Description:',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Text(
-                                'info.',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -246,8 +225,8 @@ class DetailPage extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    SizedBox(width: 16),
-                    Expanded(
+                    const SizedBox(width: 16),
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -256,7 +235,7 @@ class DetailPage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'Room Type:',
+                                  'Plane Model:',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -280,7 +259,7 @@ class DetailPage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'Price per night:',
+                                  'Flight class:',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -304,7 +283,7 @@ class DetailPage extends StatelessWidget {
                             children: [
                               Expanded(
                                 child: Text(
-                                  'Number of guests:',
+                                  'Price:',
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
@@ -335,7 +314,7 @@ class DetailPage extends StatelessWidget {
                     onPressed: () {
                       // Add your button action here
                     },
-                    child: Text('Book Now'),
+                    child: const Text('Book Now'),
                   ),
                 ),
               ],

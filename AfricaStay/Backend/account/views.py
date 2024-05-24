@@ -46,7 +46,7 @@ class LoginViews(viewsets.ViewSet):
         if request.method == 'POST':
             user_login = UserLoginSerializer(data=request.data)
             if user_login.is_valid():
-                if User.objects.filter(phone=self.request.data['phone']).exists():
+                if User.objects.filter(phone=self.request.data['phone'], password=self.request.data['password']).exists():
                     user = user_login.validated_data['user']
                     try:
                         login(request, user)
