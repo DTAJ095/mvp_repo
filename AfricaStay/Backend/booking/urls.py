@@ -11,3 +11,4 @@ router.register(r'booking/list/hotels', HotelList , basename='hotel')
 urlpatterns = [
     
 ] + router.urls
+ 

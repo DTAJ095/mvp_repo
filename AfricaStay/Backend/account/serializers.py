@@ -21,3 +21,14 @@ class UserLoginSerializer(serializers.ModelSerializer):
                 data['user'] = user
             data['user'] = user
         return data
+
+class GetUserDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=User
+        fields=['first_name', 'last_name', 'phone']
+        
+
+class HotelBookSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=HotelBook
+        fields=['book_id', 'client_name', 'phone', 'hotel_name', 'room', 'check_in', 'check_out', 'created_date']
